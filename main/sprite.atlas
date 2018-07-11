@@ -80,6 +80,82 @@ animations {
   flip_horizontal: 0
   flip_vertical: 0
 }
+animations {
+  id: "player-up"
+  images {
+    image: "/assets/units/infantry/up/1.png"
+  }
+  images {
+    image: "/assets/units/infantry/up/2.png"
+  }
+  images {
+    image: "/assets/units/infantry/up/3.png"
+  }
+  images {
+    image: "/assets/units/infantry/up/4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "player-right"
+  images {
+    image: "/assets/units/infantry/side/1.png"
+  }
+  images {
+    image: "/assets/units/infantry/side/2.png"
+  }
+  images {
+    image: "/assets/units/infantry/side/3.png"
+  }
+  images {
+    image: "/assets/units/infantry/side/4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "player-left"
+  images {
+    image: "/assets/units/infantry/side/1.png"
+  }
+  images {
+    image: "/assets/units/infantry/side/2.png"
+  }
+  images {
+    image: "/assets/units/infantry/side/3.png"
+  }
+  images {
+    image: "/assets/units/infantry/side/4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 1
+  flip_vertical: 0
+}
+animations {
+  id: "player-idle"
+  images {
+    image: "/assets/units/infantry/down-d/1.png"
+  }
+  images {
+    image: "/assets/units/infantry/down-d/2.png"
+  }
+  images {
+    image: "/assets/units/infantry/down-d/3.png"
+  }
+  images {
+    image: "/assets/units/infantry/down-d/4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0
