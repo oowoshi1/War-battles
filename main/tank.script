@@ -1,7 +1,11 @@
 function init(self)
-	-- Add initialization code here
-	-- Remove this function if not needed
 	self.speed = 20                                -- [2]
+	self.dir = vmath.vector3(0, -1, 0)
+	self.turn = false
+	local x = math.random(350, 800)
+	local y = math.random(0, 600)
+	self.target_point = vmath.vector3(x, y, 0)
+	self.current_animation = hash("tank-down")
 end
 
 function final(self)
@@ -9,12 +13,54 @@ function final(self)
 	-- Remove this function if not needed
 end
 
+local function update_animation(self)
+	print("uodate animation")
+	local animation = hash("tank-dowm")
+	if math.abs(self.dir.x) > math.abs(self.dir.y) then
+		if self.dir.x > 0 then
+			animation = hash("tank-right")
+		elseif self.dir.x < 0 then
+			animation = hash("tank-left")
+		end
+	else
+		if self.dir.y > 0 then
+			animation = hash("tank-up")
+		elseif self.dir.y < 0 then
+			animation = hash("tank-down")
+		end
+	end
+
+	if self.current_animation ~= animation then
+		print(animation)
+		msg.post("#sprite", "play_animation", { id = animation })
+		self.current_animation = animation
+	end
+end
+
 function update(self, dt)
-	-- Add update code here
-	-- Remove this function if not needed
-	local pos = go.get_position()
-	pos = pos +vmath.vector3(0, -1, 0) * self.speed * dt
-	go.set_position(pos)
+	-- tanks go straight dowm
+	-- pos = pos + vmath.vector3(0, -1, 0) * self.speed * dt
+	
+	-- tanks chase random point
+	print("update")
+	update_animation(self)
+	
+	if self.turn == true then
+		local x = math.random(350, 800)
+		local y = math.random(0, 600)
+		self.target_point = vmath.vector3(x, y, 0)
+		self.turn = false
+	else
+		local pos = go.get_position()
+		self.dir = vmath.normalize(vmath.vector3(self.target_point.x - pos.x, self.target_point.y - pos.y, 0))
+		if math.abs(self.target_point.x - pos.x) < 3 or math.abs(self.target_point.y - pos.y) < 3 then
+			self.turn = true
+		else
+			pos = pos + self.dir * self.speed * dt
+			go.set_position(pos)
+		end
+	end
+	
 end
 
 function on_message(self, message_id, message, sender)
@@ -30,4 +76,6 @@ end
 function on_reload(self)
 	-- Add reload-handling code here
 	-- Remove this function if not needed
-end
+end	
+
+	
